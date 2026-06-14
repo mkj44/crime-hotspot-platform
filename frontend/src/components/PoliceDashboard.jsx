@@ -62,8 +62,8 @@ const PoliceDashboard = () => {
             <tbody className="divide-y divide-slate-100">
               {reports.map((report) => (
               <tr key={report.id} className="hover:bg-slate-50 transition-colors">
-                <td className="px-4 py-3 font-medium text-slate-800">{report.type}</td>
-                <td className="px-4 py-3 text-slate-600">{report.locationName}</td>
+                <td className="px-4 py-3 font-medium text-slate-800">{report.crimeType}</td>
+                <td className="px-4 py-3 text-slate-600">Lat {report.latitude?.toFixed(4)}</td>
                 <td className="px-4 py-3 text-slate-500">Recent</td>
                 <td className="px-4 py-3"><span className="bg-yellow-100 text-yellow-800 px-2.5 py-0.5 rounded-full text-xs font-semibold">{report.status || 'Pending'}</span></td>
                 <td className="px-4 py-3"><button className="text-blue-600 hover:text-blue-800 font-medium">Dispatch</button></td>

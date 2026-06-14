@@ -3,7 +3,7 @@ import { useState } from 'react';
 import axios from 'axios';
 
 const ReportCrime = () => {
-  const [formData, setFormData] = useState({ type: 'Theft', locationName: '', severity: 5, description: '' });
+  const [formData, setFormData] = useState({ crimeType: 'Theft', locationName: '', severity: 5, description: '' });
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -18,12 +18,14 @@ const ReportCrime = () => {
 
     try {
         await axios.post(`${apiUrl}/api/crimes`, {
-            ...formData,
+            crimeType: formData.crimeType,
+            description: formData.description,
+            severity: parseInt(formData.severity),
             latitude: lat,
             longitude: lng
         });
         alert('Crime report submitted successfully to the backend!');
-        setFormData({ type: 'Theft', locationName: '', severity: 5, description: '' });
+        setFormData({ crimeType: 'Theft', locationName: '', severity: 5, description: '' });
     } catch (err) {
         console.error(err);
         alert('Failed to submit report. Please try again.');
@@ -44,7 +46,7 @@ const ReportCrime = () => {
           <label className="block text-sm font-medium text-slate-700 mb-1">Crime Type</label>
           <select 
             className="w-full border border-slate-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white"
-            value={formData.type} onChange={e => setFormData({...formData, type: e.target.value})}
+            value={formData.crimeType} onChange={e => setFormData({...formData, crimeType: e.target.value})}
           >
             <option>Theft</option>
             <option>Assault</option>

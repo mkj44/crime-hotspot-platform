@@ -58,9 +58,9 @@ const MapComponent = () => {
           >
             <Popup>
               <div className="p-1">
-                <strong className="text-slate-800">{crime.type}</strong>
+                <strong className="text-slate-800">{crime.crimeType}</strong>
                 <p className="text-slate-600 text-sm mt-1">Severity: {crime.severity}/10</p>
-                <p className="text-slate-600 text-sm">Location: {crime.locationName}</p>
+                <p className="text-slate-600 text-sm">Location: Lat {crime.latitude?.toFixed(4)}</p>
               </div>
             </Popup>
           </CircleMarker>
