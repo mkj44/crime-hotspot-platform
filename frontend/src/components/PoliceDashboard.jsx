@@ -2,7 +2,7 @@ import { Activity, AlertTriangle, Users, Shield } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const PoliceDashboard = () => छेद
+const PoliceDashboard = () => {
   const [reports, setReports] = useState([]);
 
   useEffect(() => {
