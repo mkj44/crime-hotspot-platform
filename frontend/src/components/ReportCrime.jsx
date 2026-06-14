@@ -1,13 +1,35 @@
 import { ShieldAlert, Send } from 'lucide-react';
 import { useState } from 'react';
+import axios from 'axios';
 
 const ReportCrime = () => {
-  const [formData, setFormData] = useState({ type: 'Theft', location: '', severity: 5, description: '' });
+  const [formData, setFormData] = useState({ type: 'Theft', locationName: '', severity: 5, description: '' });
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert('Crime report submitted successfully! (This is a frontend demo)');
-    setFormData({ type: 'Theft', location: '', severity: 5, description: '' });
+    setLoading(true);
+    
+    // Simple mock coordinates generator based on location name
+    const lat = 13.0 + (Math.random() * 0.1);
+    const lng = 80.2 + (Math.random() * 0.1);
+
+    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+
+    try {
+        await axios.post(`${apiUrl}/api/reports`, {
+            ...formData,
+            latitude: lat,
+            longitude: lng
+        });
+        alert('Crime report submitted successfully to the backend!');
+        setFormData({ type: 'Theft', locationName: '', severity: 5, description: '' });
+    } catch (err) {
+        console.error(err);
+        alert('Failed to submit report. Please try again.');
+    } finally {
+        setLoading(false);
+    }
   };
 
   return (
@@ -36,7 +58,7 @@ const ReportCrime = () => {
           <input 
             type="text" required placeholder="e.g. Velachery"
             className="w-full border border-slate-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-            value={formData.location} onChange={e => setFormData({...formData, location: e.target.value})}
+            value={formData.locationName} onChange={e => setFormData({...formData, locationName: e.target.value})}
           />
         </div>
 
@@ -59,8 +81,8 @@ const ReportCrime = () => {
           ></textarea>
         </div>
 
-        <button type="submit" className="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 flex items-center justify-center transition">
-          <Send className="w-5 h-5 mr-2" /> Submit Report
+        <button type="submit" disabled={loading} className="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 flex items-center justify-center transition">
+          <Send className="w-5 h-5 mr-2" /> {loading ? 'Submitting...' : 'Submit Report'}
         </button>
       </form>
     </div>
