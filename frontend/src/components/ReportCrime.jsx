@@ -17,7 +17,7 @@ const ReportCrime = () => {
     const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8080';
 
     try {
-        await axios.post(`${apiUrl}/api/reports`, {
+        await axios.post(`${apiUrl}/api/crimes`, {
             ...formData,
             latitude: lat,
             longitude: lng

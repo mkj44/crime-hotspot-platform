@@ -23,7 +23,7 @@ const MapComponent = () => {
     const fetchCrimes = async () => {
       const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8080';
       try {
-        const response = await axios.get(`${apiUrl}/api/reports`);
+        const response = await axios.get(`${apiUrl}/api/crimes`);
         if (response.data && response.data.length > 0) {
            setCrimes(response.data);
         } else {
