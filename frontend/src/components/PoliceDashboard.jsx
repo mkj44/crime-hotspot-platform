@@ -1,0 +1,76 @@
+import { Activity, AlertTriangle, Users, Shield } from 'lucide-react';
+
+const stats = [
+  { label: 'Total Crimes Today', value: '24', icon: Activity, color: 'text-blue-600', bg: 'bg-blue-100' },
+  { label: 'High Risk Areas', value: '3', icon: AlertTriangle, color: 'text-red-600', bg: 'bg-red-100' },
+  { label: 'Active Patrols', value: '12', icon: Users, color: 'text-green-600', bg: 'bg-green-100' },
+];
+
+const PoliceDashboard = () => {
+  return (
+    <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+      <h2 className="text-xl font-semibold mb-6 flex items-center text-slate-800">
+        <Shield className="mr-2 h-5 w-5 text-indigo-500" /> Police Analytics Dashboard
+      </h2>
+      
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        {stats.map((stat, idx) => (
+          <div key={idx} className="p-4 border border-slate-100 rounded-lg flex items-center bg-slate-50">
+            <div className={`p-3 rounded-full ${stat.bg} ${stat.color} mr-4`}>
+              <stat.icon className="h-6 w-6" />
+            </div>
+            <div>
+              <p className="text-sm text-slate-500 font-medium">{stat.label}</p>
+              <p className="text-2xl font-bold text-slate-800">{stat.value}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div>
+        <div className="flex justify-between items-end mb-3">
+          <h3 className="font-semibold text-slate-700">Recent Incident Reports</h3>
+          <button className="text-sm text-blue-600 hover:underline font-medium">View All</button>
+        </div>
+        <div className="overflow-x-auto border border-slate-200 rounded-lg">
+          <table className="w-full text-sm text-left">
+            <thead className="bg-slate-50 text-slate-600 border-b border-slate-200">
+              <tr>
+                <th className="px-4 py-3 font-medium">Type</th>
+                <th className="px-4 py-3 font-medium">Location</th>
+                <th className="px-4 py-3 font-medium">Time</th>
+                <th className="px-4 py-3 font-medium">Status</th>
+                <th className="px-4 py-3 font-medium">Action</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100">
+              <tr className="hover:bg-slate-50 transition-colors">
+                <td className="px-4 py-3 font-medium text-slate-800">Theft</td>
+                <td className="px-4 py-3 text-slate-600">Anna Nagar</td>
+                <td className="px-4 py-3 text-slate-500">10:30 PM</td>
+                <td className="px-4 py-3"><span className="bg-yellow-100 text-yellow-800 px-2.5 py-0.5 rounded-full text-xs font-semibold">Pending</span></td>
+                <td className="px-4 py-3"><button className="text-blue-600 hover:text-blue-800 font-medium">Dispatch</button></td>
+              </tr>
+              <tr className="hover:bg-slate-50 transition-colors">
+                <td className="px-4 py-3 font-medium text-slate-800">Assault</td>
+                <td className="px-4 py-3 text-slate-600">T Nagar</td>
+                <td className="px-4 py-3 text-slate-500">08:15 PM</td>
+                <td className="px-4 py-3"><span className="bg-blue-100 text-blue-800 px-2.5 py-0.5 rounded-full text-xs font-semibold">Investigating</span></td>
+                <td className="px-4 py-3"><button className="text-blue-600 hover:text-blue-800 font-medium">Update</button></td>
+              </tr>
+              <tr className="hover:bg-slate-50 transition-colors">
+                <td className="px-4 py-3 font-medium text-slate-800">Vandalism</td>
+                <td className="px-4 py-3 text-slate-600">Velachery</td>
+                <td className="px-4 py-3 text-slate-500">06:00 PM</td>
+                <td className="px-4 py-3"><span className="bg-green-100 text-green-800 px-2.5 py-0.5 rounded-full text-xs font-semibold">Closed</span></td>
+                <td className="px-4 py-3"><button className="text-blue-600 hover:text-blue-800 font-medium">View Report</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default PoliceDashboard;
